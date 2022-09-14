@@ -1,7 +1,6 @@
 <template>
   <header-section></header-section>
   <div class="container flex-grow-1 pt-5">
-    <!-- <img alt="Vue logo" src="./assets/logo.png"> -->
     <router-view></router-view>
   </div>
   <footer-section></footer-section>
