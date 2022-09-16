@@ -9,7 +9,7 @@ const routes = [
         component: ItemListContainer
     },
     {
-        path: '/producto',
+        path: '/producto/:id_product',
         component: ItemDetailContainer
     }
 ]
