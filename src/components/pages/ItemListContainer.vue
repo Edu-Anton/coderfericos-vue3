@@ -1,38 +1,16 @@
 <template>
   <div class="row">
     <div class="col-md-3">
-        Menu lateral
+        <p class="fs-5 fw-bold text-success">Todos los productos</p>
+        <ul class="list-group list-group-flush">
+            <li v-for="(brand, index) in filteredBrands" class="list-group-item" :key="index">
+            <div class="text-secondary fv-small-caps cursor-pointer">{{brand}}</div>
+            </li>
+        </ul>
     </div>
     <div class="col-md-9">
         <div class="row">
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="ratio ratio-4x3">
-                        <img src="@/assets/small-img/monitor.jpg" class="card-img-top rounded-3 imagen" alt="Imagen de Producto">
-                    </div>
-                    <div class="card-body">
-                        <div class="card-title-height">
-                            <p class="text-dark card-product-title">Impresora Multifuncional HP</p>
-                        </div>
-                        <p class="text-primary fv-small-caps">HP</p>
-                        <div class="card-description-height">
-                            <p>Quis autem vel eum iure qui in ea voluptate.</p>
-                        </div>
-                        <div class="d-flex justify-content-between">
-                            <span class="fw-bold">$ 150</span>
-                            <span class="badge rounded-pill bg-primary">Id: 5T</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat esse quaerat amet fugit officia, nemo excepturi harum sequi culpa nobis iusto laboriosam dolore placeat provident atque dicta nostrum ipsa sunt?
-                    </div>
-                </div>
-            </div>
-            <ListItemCard></ListItemCard>
+            <ListItemCard v-for="(product, index) in products" :key="index" :producto="product"></ListItemCard>
         </div>
     </div>
   </div>
@@ -40,6 +18,8 @@
 
 <script>
 import ListItemCard from '@/components/ListItemCard';
+import { collection, getDocs } from "firebase/firestore";
+import {db} from '@/services/FirestoreDb'
 
 export default {
     name: 'ItemListContainer', 
@@ -48,12 +28,27 @@ export default {
     },
     data () {
         return {
-            products: null
+            products: [],
+            brands: []
         }
     },
+    mounted () {
+        this.getProducts ()       
+    }, 
     methods: {
-        getProducts () {
-            console.log('productos');
+        async getProducts () {
+            const querySnapshot = await getDocs(collection(db, "products"));
+            querySnapshot.docs.map( doc => {
+                const data = doc.data()
+                this.products.push({...data, id: doc.id})
+                this.brands.push(data.brand)
+            })
+        }
+    },
+    computed: {
+        filteredBrands () {
+            const setBrands =  new Set(this.brands)
+            return Array.from(setBrands)
         }
     }
 }

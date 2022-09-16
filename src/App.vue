@@ -1,6 +1,6 @@
 <template>
   <header-section></header-section>
-  <div class="container flex-grow-1 pt-5">
+  <div class="container flex-grow-1 py-5">
     <router-view></router-view>
   </div>
   <footer-section></footer-section>
@@ -9,7 +9,6 @@
 <script>
 import FooterSection from './components/layout/Footer.vue'
 import HeaderSection from './components/layout/Header.vue'
-
 
 export default {
   name: 'App',
