@@ -1,6 +1,6 @@
 <template>
     <div class="col-md-4">
-        <router-link to="`/producto/${producto.id}`">
+        <router-link :to="`/producto/${producto.id}`" class="text-decoration-none text-dark">
             <div class="card card-shadow mt-4">
                 <div class="ratio ratio-4x3">
                     <!-- <img src="data:image/gif;base64,@/assets/small-img/monitor.jpg" class="card-img-top rounded-3 imagen" alt="Imagen de Producto"> -->
@@ -11,9 +11,9 @@
                     <div class="card-title-height">
                         <p class="fw-bold text-success card-product-title">{{producto.title}}</p>
                     </div>
-                    <p class="text-primary fv-small-caps">{{producto.brand}}</p>
+                    <p class="fw-bold text-secondary fv-small-caps">{{producto.brand}}</p>
                     <div class="card-description-height">
-                        <p class="fs-6">{{producto.description}}</p>
+                        <p class="fs-6 text-decoration-none">{{producto.description}}</p>
                     </div>
                     <div class="d-flex justify-content-between">
                         <span class="fw-bold">$ {{producto.price}}</span>

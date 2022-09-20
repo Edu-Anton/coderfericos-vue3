@@ -15,7 +15,7 @@
                 <i class="bi bi-list border p-2 border-radius-round cursor-pointer" data-bs-toggle="dropdown"></i>
                 <span class="ms-2">Categorías</span>
                 <ul class="dropdown-menu mt-2" aria-labelledby="dropdownMenu2">
-                  <li>
+                  <!-- <li>
                     <router-link to="/categories/1" class="nav-link" activeClassName="selected">
                       <i class="bi bi-tv me-2"></i>
                       Periféricos
@@ -38,12 +38,15 @@
                       <i class="bi bi-camera-video me-2"></i>
                       Video
                     </router-link>
-                  </li>
+                  </li> -->
                 </ul>
               </div>
             </div>
             <div class="col-md-3 text-end">
                 <a href="/" class="text-decoration-none text-light">Inicio</a>
+                <span class="d-inline-block rounded-circle bg-info px-2 py-1 ms-3">
+                  <i className="bi bi-cart3 text-light"></i>
+                </span>
             </div>
         </div>
     </div>

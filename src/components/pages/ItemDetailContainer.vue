@@ -1,8 +1,17 @@
 <template>
-  <div class="row">
+  <div v-if="isLoading" class="row">
+    <div class="col-md-12">
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div v-else class="row">
     <div class="col-md-4">
       <div>
-        <img class="img-fluid" src="@/assets/lg-img/impresora1x1-min.jpg" alt="">
+        <img class="img-fluid" :src="require(`../../assets/lg-img/${product.pictureUrl}1x1-min.jpg`)" alt="">
       </div>
     </div>
     <div class="col-md-8">
@@ -17,7 +26,7 @@
       <h6><span class="badge bg-danger p-3 py-2 mt-2">20% Dsto</span></h6>
       <p class="fs-4 text-danger">$ {{ product.price }}</p>
       <hr>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed non sint eveniet, distinctio laudantium nulla repudiandae nam, cupiditate, facilis beatae ipsam! Itaque molestiae possimus, voluptas delectus non quos mollitia esse?</p>
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed non sint eveniet, distinctio laudantium nulla repudiandae nam, cupiditate, facilis beatae ipsam! Itaque molestiae possimus, voluptas delectus non quos mollitia esse?</p><span>{{product.pictureUrl}}</span>
       <hr>
       <p class="font-monospace text-secondary">
         <i class="fs-5 bi bi-shield-check text-info me-2"></i> Un año de garantía
@@ -31,7 +40,7 @@
       <span class="fw-bold text-success">Disponible: </span><span> {{ product.stock }} unidades</span>
       <hr>
       <div class="d-flex align-items-center">
-        <ItemCount></ItemCount>
+        <ItemCount/>
         <button class="btn btn-danger btn-lg ms-4">Añadir al carrito</button>
       </div>
       <hr>
@@ -52,18 +61,21 @@ export default {
   },
   data () {
     return {
-      product: {}
+      product: {},
+      isLoading: true
     }
   },
-  mounted () {
+  created () {
     this.getProduct()
   },
   methods: {
     async getProduct () {
-      const id = '5TwepWyQ2YTttq73ZLLm'
-      const docRef = doc(db, "products", id)
+      const {id_product} = this.$route.params
+      const docRef = doc(db, "products", id_product)
       const docSnap = await getDoc(docRef)
-      this.product = {...docSnap.data()}      
+      this.product = {...docSnap.data()}
+      this.isLoading = false
+           
     }
   }
 }

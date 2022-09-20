@@ -1,14 +1,35 @@
 <template>
   <div class="numeric-stepper__container">
-    <button class="numeric-stepper__btn">-</button>
-    <div class="numeric-stepper__text mx-3">1</div>
-    <button class="numeric-stepper__btn">+</button>
+    <button class="numeric-stepper__btn" @click="substractCounter">-</button>
+    <div class="numeric-stepper__text mx-3">
+        <input class="numeric-stepper__input" type="text" v-model="counter">
+    </div>
+    <button class="numeric-stepper__btn" @click="addCounter">+</button>
+    <p>{{maxstock}}</p>
   </div>
 </template>
 
 <script>
 export default {
-    name: 'ItemCount'
+    name: 'ItemCount',
+    data () {
+        return {
+            counter: 1
+        }
+    },
+    methods: {
+        addCounter () {
+          this.counter = this.counter + 1;
+        },
+        substractCounter () {
+            if (this.counter > 1) {
+                this.counter = this.counter - 1;
+            } else {
+                alert('Debe  seleccionar al menos un producto.')
+            }
+        }
+
+    }
 }
 </script>
 
