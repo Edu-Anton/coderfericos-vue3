@@ -18,7 +18,7 @@
       <div class="d-flex align-items-center justify-content-between">
         <h1 class="h2 fw-normal text-secondary">{{ product.title }}</h1>
         <div>
-          <span class="text-secondary">(cod: 5twepW)</span>
+          <span class="text-secondary">(Código: {{product.id.substring(0,6)}})</span>
           <i className="bi bi-share mx-3"></i>
         </div>
       </div>
@@ -73,7 +73,7 @@ export default {
       const {id_product} = this.$route.params
       const docRef = doc(db, "products", id_product)
       const docSnap = await getDoc(docRef)
-      this.product = {...docSnap.data()}
+      this.product = {...docSnap.data(), id:id_product}
       this.isLoading = false
            
     }
