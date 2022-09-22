@@ -18,7 +18,7 @@
 
 <script>
 import ListItemCard from '@/components/ListItemCard';
-import { collection, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs } from "firebase/firestore";
 import {db} from '@/services/FirestoreDb'
 
 export default {
@@ -26,18 +26,45 @@ export default {
     components: {
         ListItemCard
     },
+    props: ['id_category'],
     data () {
         return {
             products: [],
-            brands: []
+            brands: [],
+        }
+    },
+    watch: {
+        id_category() {
+            this.getProducts ()
         }
     },
     mounted () {
         this.getProducts ()       
-    }, 
+    },
     methods: {
         async getProducts () {
+            // await this.getAllProducts()
+            this.products = []
+            this.brands = []
+            if (this.id_category) {
+                await this.getProductsByCategory()
+            } else {
+                await this.getAllProducts()
+            }
+            console.log(this.id_category)
+        },
+        async getAllProducts () {
             const querySnapshot = await getDocs(collection(db, "products"));
+            querySnapshot.docs.map( doc => {
+                const data = doc.data()
+                this.products.push({...data, id: doc.id})
+                this.brands.push(data.brand)
+            })
+        },
+        async getProductsByCategory () {
+            const { id_category } = this.$route.params
+            const q = query(collection(db, "products"), where("category_id", "==", Number(id_category)))
+            const querySnapshot = await getDocs(q);
             querySnapshot.docs.map( doc => {
                 const data = doc.data()
                 this.products.push({...data, id: doc.id})

@@ -3,8 +3,10 @@
     <div class="container">
         <div class="row align-items-center">
             <div class="col-md-3 d-flex align-items-center">
+              <router-link to="/" class="d-flex align-items-center text-light text-decoration-none">
                 <i class="bi bi-keyboard keyboard-icon fs-1"></i>
                 <span class="fs-4 ps-2">Coderféricos</span>
+              </router-link>
             </div>
             <!-- <div class="col-md-6">
                 <i class="bi bi-list border p-2 border-radius-round cursor-pointer me-2" data-bs-toggle="dropdown" aria-expanded="false"></i>
@@ -15,30 +17,30 @@
                 <i class="bi bi-list border p-2 border-radius-round cursor-pointer" data-bs-toggle="dropdown"></i>
                 <span class="ms-2">Categorías</span>
                 <ul class="dropdown-menu mt-2" aria-labelledby="dropdownMenu2">
-                  <!-- <li>
-                    <router-link to="/categories/1" class="nav-link" activeClassName="selected">
+                  <li>
+                    <router-link to="/categorias/1" class="nav-link" activeClassName="selected">
                       <i class="bi bi-tv me-2"></i>
                       Periféricos
                     </router-link>
                   </li>
                   <li>
-                    <router-link to="/categories/2" class="nav-link" activeClassName="selected">
+                    <router-link to="/categorias/2" class="nav-link" activeClassName="selected">
                       <i class="bi bi-sd-card me-2"></i> 
                       Almacenamiento
                     </router-link>
                   </li>
                   <li>
-                    <router-link to="/categories/3" class="nav-link" activeClassName="selected">
+                    <router-link to="/categorias/3" class="nav-link" activeClassName="selected">
                       <i class="bi bi-speaker me-2"></i>
                       Audio y Sonido
                     </router-link>
                   </li>
                   <li>
-                    <router-link to="/categories/4" class="nav-link" activeClassName="selected">
+                    <router-link to="/categorias/4" class="nav-link" activeClassName="selected">
                       <i class="bi bi-camera-video me-2"></i>
                       Video
                     </router-link>
-                  </li> -->
+                  </li>
                 </ul>
               </div>
             </div>
@@ -65,8 +67,21 @@ export default {
 </script>
 
 <style>
-    header {
-        background-color: #8fca00;
-        height: 70px;
-    }
+  header {
+      background-color: #8fca00;
+      height: 70px;
+  }  
+  .nav-link {
+    color: #555;
+    font-family: 'Poppins', sans-serif;
+    font-size: .9rem;
+    padding: 0.5rem 1rem;
+  }
+  .nav-link:hover {
+    color: #333;
+    background-color: #eee;
+  }
+  .dropdown-menu {
+    min-width: 12rem;
+  }
 </style>

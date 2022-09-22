@@ -10,6 +10,14 @@ const routes = [
         component: ItemListContainer
     },
     {
+        path: '/categorias/:id_category',
+        component: ItemListContainer,
+        props: (route) => {
+            const {id_category} = route.params
+            return {id_category}
+        }
+    },
+    {
         path: '/producto/:id_product',
         component: ItemDetailContainer
     },
