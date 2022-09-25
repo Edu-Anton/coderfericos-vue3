@@ -51,7 +51,6 @@ export default {
             } else {
                 await this.getAllProducts()
             }
-            console.log(this.id_category)
         },
         async getAllProducts () {
             const querySnapshot = await getDocs(collection(db, "products"));

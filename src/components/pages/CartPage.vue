@@ -4,36 +4,40 @@
         <div class="card mb-4">
             <div class="card-body d-flex justify-content-between align-items-center">
                 <span class="fs-4 fw-light text-secondary">Bolsa de compra (1 producto)</span>
-                <button class="btn btn-outline-danger btn-sm">Limpiar Carrito</button>
+                <button class="btn btn-outline-danger btn-sm" @click="resetCart">Limpiar Carrito</button>
             </div>
         </div>
 
-        <div class="card mb-3">
+        <div v-for="(product, index) in cartList" :key="index"  class="card mb-3">
             <div class="card-body">
                 <div class="row">
                     <div class="col-2">
-                        <img src="../../assets/lg-img/impresora1x1-min.jpg" class="img-fluid" alt="">
+                        <!-- <img src="../../assets/lg-img/impresora1x1-min.jpg" class="img-fluid" alt=""> -->
+                        <img :src="require(`../../assets/lg-img/${product.pictureUrl}1x1-min.jpg`)" class="img-fluid" alt="">
                     </div>
                     <div class="col-4">
-                        <h2 class="fs-6 mb-1 text-success">IMPRESORA MULTIFUNCIONAL HP</h2>
+                        <h2 class="fs-6 mb-1 text-success">{{ product.title.toUpperCase() }}</h2>
                         <span class="d-block mb-3">Código: 5twe</span>
-                        <span class="text-decoration-underline co-fs-7 co-cursor-pointer">Eliminar</span>
+                        <span class="text-decoration-underline co-fs-7 co-cursor-pointer" @click="removeItemFromCart(product.id, product.quantity)">Eliminar</span>
                     </div>
                     <div class="col-3 d-flex flex-column justify-content-between">
-                        <p class="fs-5 text-danger">$150 (Oferta)</p>
+                        <p class="fs-5 text-danger">${{ product.price }} (Oferta)</p>
                         <span class="co-fs-7">
                             <i className="bi bi-truck fs-6 me-1 text-success"></i>
                             Despacho a domicilio
                         </span>
                     </div>
                     <div class="col-3 d-flex flex-column justify-content-between align-items-end">
-                        <ItemCount></ItemCount>
+                        <ItemCount 
+                            :counter="product.quantity"
+                            @addCounter="addCounter"
+                        />
                         <span class="text-success fw-bold co-fs-7">Disponible</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="card">
+        <!-- <div class="card">
             <div class="card-body">
                 <div class="row">
                     <div class="col-2">
@@ -57,7 +61,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
     <div class="col-4">
         <div class="card">
@@ -105,8 +109,34 @@ import ItemCount from '../ItemCount.vue';
 export default {
     components: {
         ItemCount
-}
-
+    },
+    data () {
+        return {
+            cartList: []
+        }
+    },
+    // computed: {
+    //     cartList () {
+    //         return this.$store.state.cartList
+    //     }
+    // },
+    mounted () {
+        this.getItemsInCart()
+    },
+    methods: {
+        getItemsInCart () {
+            // this.cartList.push([...this.$store.state.cartList])
+            this.cartList = [...this.$store.state.cartList]
+        },
+        removeItemFromCart (id, quantity) {
+            this.$store.commit('removeItemFromCart', {id, quantity})
+            this.getItemsInCart()
+        },
+        resetCart () {
+            this.$store.commit('resetCart'),
+            this.getItemsInCart()
+        }
+    }
 }
 </script>
 

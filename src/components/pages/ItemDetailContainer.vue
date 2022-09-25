@@ -40,11 +40,14 @@
       <span class="fw-bold text-success">Disponible: </span><span> {{ product.stock }} unidades</span>
       <hr>
       <div class="d-flex align-items-center">
-        <ItemCount/>
-        <button class="btn btn-danger btn-lg ms-4">Añadir al carrito</button>
+        <ItemCount
+          :counter="quantity" 
+          @addCounter="addCounter"
+        />
+        <button class="btn btn-danger btn-lg ms-4" @click="addItemToCart(product, quantity)">Añadir al carrito</button>
       </div>
       <hr>
-
+      <h1>NewCounter: {{quantity}}</h1>
     </div>
   </div>
 </template>
@@ -62,7 +65,8 @@ export default {
   data () {
     return {
       product: {},
-      isLoading: true
+      isLoading: true,
+      quantity: 1,
     }
   },
   created () {
@@ -74,8 +78,13 @@ export default {
       const docRef = doc(db, "products", id_product)
       const docSnap = await getDoc(docRef)
       this.product = {...docSnap.data(), id:id_product}
-      this.isLoading = false
-           
+      this.isLoading = false  
+    },
+    addItemToCart (product, quantity) {
+      this.$store.commit('addItemToCart', {...product, quantity});
+    },
+    addCounter () {
+      this.quantity ++
     }
   }
 }
