@@ -46,11 +46,14 @@
             </div>
             <div class="col-md-3 text-end">
                 <router-link to="/" class="text-decoration-none text-light">Inicio</router-link>
-                <router-link to="/cart">
+                <router-link 
+                  v-if="$store.state.totalQuantity"
+                  to="/cart" 
+                >
                   <span class="d-inline-block rounded-circle bg-light px-2 py-1 ms-3 position-relative">
                     <i className="bi bi-cart3 text-dark"></i>
                     <span className="badge rounded-pill bg-danger fw-bold d-inline-block position-absolute top-0 start-100 translate-middle">
-                      {{ $store.state.totalQuantity }}<!-- {quantityInCart} -->
+                      {{ $store.state.totalQuantity }}
                     </span>
                   </span>
                 </router-link>

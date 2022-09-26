@@ -4,10 +4,14 @@ export default createStore({
 
     state: {
         totalQuantity: 0,
+        totalAccount: 0,
         cartList: []
     },
 
     mutations: {
+        getTotalAccount (state) {
+            state.totalAccount = state.cartList.reduce((acum, product) => (acum + product.price*product.quantity), 0);
+        },
         addItemToCart ( state, addedProduct ) {
             if (isItemInCart(state.cartList, addedProduct.id)) {
                 const index = state.cartList.findIndex(item => item.id == addedProduct.id)
@@ -24,6 +28,23 @@ export default createStore({
         },
         resetCart (state) {
             state.cartList = []
+            state.totalQuantity = 0
+            state.totalAccount = 0
+        },
+        addOneToItem (state, id) {
+            const index = state.cartList.findIndex(item => item.id == id)
+            state.cartList[index].quantity ++  
+            state.totalQuantity ++
+        },
+        subtractOneToItem (state, id) {
+            const index = state.cartList.findIndex(item => item.id == id)
+            const item = state.cartList[index]
+            if (item.quantity > 1 ) {
+                state.cartList[index].quantity --  
+                state.totalQuantity --
+            } else {
+                alert('Debe  seleccionar al menos un producto.')
+            }
         }
     }
 })

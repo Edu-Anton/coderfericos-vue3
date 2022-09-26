@@ -1,11 +1,11 @@
 <template>
   <div class="numeric-stepper__container">
-    <button class="numeric-stepper__btn" @click="substractCounter">-</button>
+    <button class="numeric-stepper__btn" @click="subtractOneToItem">-</button>
     <div class="numeric-stepper__text mx-3">
         <!-- <input class="numeric-stepper__input" type="text" v-model="counter"> -->
         <input class="numeric-stepper__input" type="text" :value="counter">
     </div>
-    <button class="numeric-stepper__btn" @click="addCounter">+</button>
+    <button class="numeric-stepper__btn" @click="addOneToItem">+</button>
   </div>
 </template>
 
@@ -24,9 +24,8 @@ export default {
       }
     },
     methods: {
-        addCounter () {
-          // this.counter = this.counter + 1;
-          this.$emit('addCounter')
+        addOneToItem () {
+         this.$emit('addOneToItem') 
         },
         substractCounter () {
             if (this.counter > 1) {
@@ -34,6 +33,9 @@ export default {
             } else {
                 alert('Debe  seleccionar al menos un producto.')
             }
+        },
+        subtractOneToItem () {
+          this.$emit('subtractOneToItem')
         }
 
     }

@@ -30,38 +30,14 @@
                     <div class="col-3 d-flex flex-column justify-content-between align-items-end">
                         <ItemCount 
                             :counter="product.quantity"
-                            @addCounter="addCounter"
+                            @addOneToItem="addOneToItem(product.id)"
+                            @subtractOneToItem="subtractOneToItem(product.id)"
                         />
                         <span class="text-success fw-bold co-fs-7">Disponible</span>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- <div class="card">
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-2">
-                        <img src="../../assets/lg-img/auriculares1x1-min.jpg" class="img-fluid" alt="">
-                    </div>
-                    <div class="col-4">
-                        <h2 class="fs-6 mb-1 text-success">IMPRESORA MULTIFUNCIONAL HP</h2>
-                        <span class="d-block mb-3">Código: 5twe</span>
-                        <span class="text-decoration-underline co-fs-7 co-cursor-pointer">Eliminar</span>
-                    </div>
-                    <div class="col-3 d-flex flex-column justify-content-between">
-                        <p class="fs-5 text-danger">$150 (Oferta)</p>
-                        <span class="co-fs-7">
-                            <i className="bi bi-truck fs-6 me-1 text-success"></i>
-                            Despacho a domicilio
-                        </span>
-                    </div>
-                    <div class="col-3 d-flex flex-column justify-content-between align-items-end">
-                        <ItemCount></ItemCount>
-                        <span class="text-success fw-bold co-fs-7">Disponible</span>
-                    </div>
-                </div>
-            </div>
-        </div> -->
     </div>
     <div class="col-4">
         <div class="card">
@@ -69,7 +45,7 @@
                 <h2 class="fs-4 fw-light text-secondary mt-2">Resumen de su orden</h2>
                 <div class="pt-4 pb-3 d-flex justify-content-between">
                     <span>Sub-total productos</span>
-                    <span>$ 150</span>
+                    <span>$ {{$store.state.totalAccount}}</span>
                 </div>
                 <div class="pb-2 d-flex justify-content-between">
                     <span>Costo de envío</span>
@@ -78,7 +54,7 @@
                 <hr>
                 <div class="py-2 d-flex justify-content-between fw-bold text-secondary">
                     <span>Precio Total</span>
-                    <span>$ 160</span>
+                    <span>$ {{ $store.state.totalAccount + 10 }}</span>
                 </div>
                 <div class="d-grid gap-2 mt-3 mb-3">
                     <button class="btn btn-danger btn-lg btn-block mb-3 fs-6 d-block p-3 rounded-1">Confirmar mi compra</button>
@@ -127,6 +103,7 @@ export default {
         getItemsInCart () {
             // this.cartList.push([...this.$store.state.cartList])
             this.cartList = [...this.$store.state.cartList]
+            this.$store.commit('getTotalAccount')
         },
         removeItemFromCart (id, quantity) {
             this.$store.commit('removeItemFromCart', {id, quantity})
@@ -135,6 +112,14 @@ export default {
         resetCart () {
             this.$store.commit('resetCart'),
             this.getItemsInCart()
+        },
+        addOneToItem (id) {
+            this.$store.commit('addOneToItem', id)
+            this.$store.commit('getTotalAccount')
+        },
+        subtractOneToItem (id) {
+            this.$store.commit('subtractOneToItem', id)
+            this.$store.commit('getTotalAccount')
         }
     }
 }

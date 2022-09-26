@@ -42,7 +42,8 @@
       <div class="d-flex align-items-center">
         <ItemCount
           :counter="quantity" 
-          @addCounter="addCounter"
+          @addOneToItem="addOneToItem"
+          @subtractOneToItem="subtractOneToItem"
         />
         <button class="btn btn-danger btn-lg ms-4" @click="addItemToCart(product, quantity)">Añadir al carrito</button>
       </div>
@@ -83,8 +84,15 @@ export default {
     addItemToCart (product, quantity) {
       this.$store.commit('addItemToCart', {...product, quantity});
     },
-    addCounter () {
+    addOneToItem () {
       this.quantity ++
+    },
+    subtractOneToItem () {
+      if (this.quantity > 1) {
+        this.quantity --
+      } else {
+        alert('Debe  seleccionar al menos un producto.')
+      }
     }
   }
 }
