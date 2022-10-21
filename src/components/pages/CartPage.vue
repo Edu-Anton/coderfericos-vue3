@@ -57,7 +57,7 @@
                     <span>$ {{ $store.state.totalAccount + 10 }}</span>
                 </div>
                 <div class="d-grid gap-2 mt-3 mb-3">
-                    <button class="btn btn-danger btn-lg btn-block mb-3 fs-6 d-block p-3 rounded-1">Confirmar mi compra</button>
+                    <router-link to="/checkout" class="btn btn-danger btn-lg btn-block mb-3 fs-6 d-block p-3 rounded-1">Confirmar mi compra</router-link>
                 </div>
 
                 <div class="d-flex justify-content-between">

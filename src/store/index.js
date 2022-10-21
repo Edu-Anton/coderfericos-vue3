@@ -5,7 +5,8 @@ export default createStore({
     state: {
         totalQuantity: 0,
         totalAccount: 0,
-        cartList: []
+        cartList: [],
+        orderReceived: {}
     },
 
     mutations: {
@@ -45,7 +46,10 @@ export default createStore({
             } else {
                 alert('Debe  seleccionar al menos un producto.')
             }
-        }
+        },
+        // getOrderReceived (state, order) {
+
+        // }
     }
 })
 

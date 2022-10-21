@@ -3,6 +3,8 @@ import {createRouter, createWebHashHistory} from 'vue-router'
 import ItemListContainer from '@/components/pages/ItemListContainer'
 import ItemDetailContainer from '@/components/pages/ItemDetailContainer'
 import CartPage from '@/components/pages/CartPage'
+import CheckoutPage from '@/components/pages/CheckoutPage'
+import OrderReceivedPage from '@/components/pages/OrderReceivedPage'
 
 const routes = [
     {
@@ -24,7 +26,15 @@ const routes = [
     {
         path: '/cart',
         component: CartPage
-    }
+    },
+    {
+        path: '/checkout',
+        component: CheckoutPage
+    },
+    {
+        path: '/order-received/:id_order',
+        component: OrderReceivedPage
+    },
 ]
 
 const router = createRouter({
