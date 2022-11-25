@@ -9,6 +9,10 @@
         </ul>
     </div>
     <div class="col-md-9">
+        <div class="text-end">
+            <i class="bi bi-grid cards-grid-btn me-2"></i>
+            <i class="bi bi-view-stacked cards-grid-btn"></i>
+        </div>
         <div class="row">
             <ListItemCard v-for="(product, index) in products" :key="index" :producto="product"></ListItemCard>
         </div>
@@ -81,5 +85,13 @@ export default {
 </script>
 
 <style>
+    .cards-grid-btn {
+        cursor: pointer;
+        padding: .2rem .3rem;
+    }
 
+    .cards-grid-btn:hover {
+        color: #fff;
+        background-color: var(--primary-green); 
+    }
 </style>

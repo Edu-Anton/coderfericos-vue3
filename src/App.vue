@@ -20,6 +20,10 @@ export default {
 </script>
 
 <style>
+:root {
+  --primary-green: #8fca00;
+}
+
 #app {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

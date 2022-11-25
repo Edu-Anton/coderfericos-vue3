@@ -29,7 +29,7 @@
         </li>
         <li class="list-group-item bg-grey">
             <p class="mb-1 order__label text-success fw-bold">MONTO DE COMPRA</p>
-            <p class="mb-0 order__info">USD ${{ $store.state.totalAccount }} </p>
+            <p class="mb-0 order__info">USD ${{ totalAccount }} </p>
         </li>
       </ul>
       <h2 class="fs-4 text-success fw-light mt-5">Detalle de la Orden</h2>
@@ -64,6 +64,7 @@
 <script>
 import { doc, getDoc } from "firebase/firestore";
 import {db} from '@/services/FirestoreDb'
+import { mapState } from 'vuex';
 
 export default {
     data() {
@@ -84,6 +85,9 @@ export default {
             this.isLoading = false
             console.log(this.order)
         }
+    },
+    computed: {
+        ...mapState(['totalAccount'])
     }
 }
 </script>
